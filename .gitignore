@@ -1,7 +1,0 @@
-**/*.node_modules/
-*.log
-.env
-
-**/.env
-**/*.env
-bloglist-backend/.env
