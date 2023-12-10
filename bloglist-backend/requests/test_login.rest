@@ -1,0 +1,81 @@
+
+### Adding a user to our database  -- !!!  
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+    "username": "admin2",
+    "name": "Glen",
+    "password": "admin2"
+}
+
+### creating a new blog after implementing user id and blog id relationship
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+    "title": "User id of the blog creator is sent with the request34444444",
+    "author": "Wayor",
+    "url": "NA.com",
+    "likes": 4,
+    "userId": "655a7c9610c3f401ea971ab8"
+}
+
+
+### 
+POST http://localhost:3001/api/login/
+Content-Type: application/json
+{
+  "username": "test",
+  "password": "test"
+}
+
+
+### Testing valid user
+POST http://localhost:3001/api/login/
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "salainen"
+}
+
+### Testing post creation without valid token 
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY1NWE3Yzk2MTBjM2Y0MDFlYTk3MWFiOCIsImlhdCI6MTcwMDQzNTg0NX0.HzrDvKWryQZfQUP04pC1LlAmODUNuBDZ4cPnBVZ0Lrc
+
+{
+  "content": "Single app page does not have Authorization token",
+  "important": true
+}
+
+### Testing post creation WITH valid token 
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY1NWE3Yzk2MTBjM2Y0MDFlYTk3MWFiOCIsImlhdCI6MTcwMDQzNjUyN30.Tu7cpVCnftht9AZ_5Bf2XX5DrIyTv2bGZ6SCuBKqg8U
+
+{
+    "title": "User id of the blog creator is sent with the reques3t - middleware abstraction userExtractor",
+    "author": "Wayor",
+    "url": "NAA.com",
+    "likes": 4
+}
+
+
+### DELETE WITH NO AUTH HEADER 
+DELETE http://localhost:3001/api/blogs/655aeb21bcc2edce28f9a72a
+Content-Type: application/json
+
+
+
+### Testing with NO TITLE (yes AUTH)
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY1NWE3Yzk2MTBjM2Y0MDFlYTk3MWFiOCIsImlhdCI6MTcwMDQzNjUyN30.Tu7cpVCnftht9AZ_5Bf2XX5DrIyTv2bGZ6SCuBKqg8U
+
+{
+    "author": "Wayor",
+    "url": "NAA.com",
+    "likes": 4
+}
