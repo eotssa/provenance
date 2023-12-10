@@ -2,4 +2,6 @@
 *.log
 .env
 
+**/.env
 **/*.env
+bloglist-backend/.env
