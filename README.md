@@ -16,25 +16,20 @@ This project is a full-stack web application for a blogging platform. It enables
 ## Project Structure
 
 ### Backend
-Organized into modules for enhanced maintainability:
-- `controllers`: Route handlers (CRUD for blogs, user login, testing, user management).
+- `controllers`: Route handlers
 - `models`: Mongoose schemas (`blog.js`, `user.js`).
 - `utils`: Configuration, middleware, and logging.
 - `tests`: Unit and Integration tests.
 
 ### Frontend
-Built with React, managed by Redux:
-- `src/components`: UI components.
-- `src/reducers`: Redux state management.
-- `src/services`: API services.
-- `App.jsx`: Main app component.
-- `main.jsx`: React entry point.
+- `src/components`: UI
+- `src/reducers`: Redux Toolkit
+- `src/services`: API
 
 ## Running the Application
 
-### Backend Setup
-1. Set environment variables in `.env` (e.g., MongoDB URI, JWT secret).
-2. Run these commands in the backend directory:
+### Backend directory commands
+Set environment variables in `.env`
    ```bash
    npm start          # Start server in production mode
    npm run dev        # Start in development mode (nodemon)
@@ -43,9 +38,7 @@ Built with React, managed by Redux:
    npm run start:test # Start server in test environment
    ```
 
-### Frontend Setup
-1. Run `npm install` in the frontend directory.
-2. Execute these commands:
+### Frontend directory commands 
    ```bash
    npm run dev          # Start Vite dev server
    npm run build        # Build for production
