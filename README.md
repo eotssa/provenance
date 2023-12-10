@@ -1,9 +1,4 @@
 # Blog-App
-A React and Node.js CRUD application facilitating user and blog connectivity. Users can like, comment, delete, and add posts. The application is styled using Chakra UI.
-
----
-
-# Blog Platform
 
 This project is a full-stack web application for a blogging platform. It enables users to create, update, and delete blog posts, and manage user authentication.
 
