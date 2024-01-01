@@ -8,7 +8,7 @@ import { initUser, clearUser } from '../reducers/user'
 export const useNotification = () => {
   const dispatch = useDispatch()
 
-  return (message, type = 'info')  => {
+  return (message, type = 'info') => {
     dispatch(notify(message, type))
   }
 }
@@ -16,7 +16,7 @@ export const useNotification = () => {
 export const useInitialization = () => {
   const dispatch = useDispatch()
 
-  return ()  => {
+  return () => {
     dispatch(initializeBlogs())
     dispatch(initializeUsers())
     dispatch(initUser())
@@ -26,7 +26,7 @@ export const useInitialization = () => {
 export const useClearUser = () => {
   const dispatch = useDispatch()
 
-  return ()  => {
+  return () => {
     dispatch(clearUser())
   }
 }
@@ -41,6 +41,6 @@ export const useField = (type) => {
   return {
     type,
     value,
-    onChange
+    onChange,
   }
 }
