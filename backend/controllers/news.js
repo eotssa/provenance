@@ -1,17 +1,23 @@
-// controllers/news.js
-const axios = require('axios')
+const NewsAPI = require('newsapi')
+const newsapi = new NewsAPI('your-api-key-here')
 const NewsArticle = require('../models/newsArticle')
 
-const fetchAndStoreNews = async (source, query, apiKey) => {
+const fetchAndStoreNews = async (query) => {
   try {
-    const response = await axios.get(
-      `https://newsapi.org/v2/everything?sources=${source}&q=${query}&apiKey=${apiKey}`
-    )
-    const articles = response.data.articles
+    const response = await newsapi.v2.everything({
+      q: query,
+      language: 'en',
+      sortBy: 'relevancy',
+    })
+
+    const articles = response.articles
 
     // Store each article in MongoDB
     articles.forEach(async (article) => {
-      const newArticle = new NewsArticle({ ...article, source: source })
+      const newArticle = new NewsArticle({
+        ...article,
+        source: article.source.name,
+      })
       await newArticle.save()
     })
 
@@ -21,28 +27,15 @@ const fetchAndStoreNews = async (source, query, apiKey) => {
   }
 }
 
-module.exports = { fetchAndStoreNews }
-
 //-----------------------------------------------
 const express = require('express')
 const router = express.Router()
 
 router.get('/aggregate', async (req, res) => {
-  const event = req.query.event // or use req.params
-  // Define your news sources and API keys
-  const sources = {
-    source1: 'api-key-1',
-    source2: 'api-key-2',
-    // Add more sources as needed
-  }
+  const query = req.query.q // get the query parameter from the request
+  const count = await fetchAndStoreNews(query)
 
-  let totalArticles = 0
-  for (const [source, apiKey] of Object.entries(sources)) {
-    const count = await fetchAndStoreNews(source, event, apiKey)
-    totalArticles += count
-  }
-
-  res.json({ message: `Aggregated ${totalArticles} articles about ${event}.` })
+  res.json({ message: `Aggregated ${count} articles about ${query}.` })
 })
 
 module.exports = router
